@@ -49,43 +49,51 @@ def blink():
     
 
 def stop():
-    ma1.value(0)
-    ma2.value(0)
-    mas.value(0)
+    ma1.low()
+    ma2.low()
+    mas.low()
     
-    mb1.value(0)
-    mb2.value(0)
-    mbs.value(0)
+    mb1.low()
+    mb2.low()
+    mbs.low()
 
 def foreward():
-    ma1.value(0)
-    ma2.value(1)
-    mas.value(1)
+    ma1.low()
+    ma2.high()
+    mas.high()
     
-    mb1.value(0)
-    mb2.value(1)
-    mbs.value(1)
+    mb1.low()
+    mb2.high()
+    mbs.high()
     
 def backwards():
-    ma1.value(1)
-    ma2.value(0)
-    mas.value(1)
+    ma1.high()
+    ma2.low()
+    mas.high()
     
-    mb1.value(1)
-    mb2.value(0)
-    mbs.value(1)
+    mb1.high()
+    mb2.low()
+    mbs.high()
     
 def turn():
-    ma1.value(1)
-    ma2.value(0)
-    mas.value(1)
+    ma1.high()
+    ma2.low()
+    mas.high()
     
-    mb1.value(0)
-    mb2.value(1)
-    mbs.value(1)
+    mb1.low()
+    mb2.high()
+    mbs.high()
 
 # Fade the LED in and out a few times.
 while True:
+    blink()
+    blink()
+    blink()
+    blink()
+    blink()
+    blink()
+    blink()
+    blink()
     blink()
     
     stop()
@@ -126,4 +134,5 @@ while True:
     
     
     
+
 
