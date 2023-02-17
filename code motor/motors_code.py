@@ -113,7 +113,7 @@ while True:
     blink()
     blink()
     
-    backward()
+    backwards()
     time.sleep(1)
     blink()
     blink()
