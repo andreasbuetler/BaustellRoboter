@@ -1,3 +1,4 @@
+
 from machine import Pin, PWM
 import time
 
@@ -18,7 +19,6 @@ pwm = PWM(Pin(25))
 
 # Set the PWM frequency.
 pwm.freq(1000)
-
 def blinkey():
     duty = 0
     direction = 1
@@ -83,7 +83,12 @@ def turn():
     mb1.low()
     mb2.high()
     mbs.high()
-
+# # play audio 🎶
+# try:
+#     Pico_Audio = Audio()
+#     Pico_Audio.write()
+# except (KeyboardInterrupt, Exception) as e:
+#     print("caught exception {} {}".format(type(e).__name__, e))
 # Fade the LED in and out a few times.
 while True:
     blink()
