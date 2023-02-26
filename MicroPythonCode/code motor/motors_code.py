@@ -15,37 +15,19 @@ mb2 = Pin(20, Pin.OUT) #2
 mbs = Pin(19, Pin.OUT) #Enable
 
 # Construct PWM object, with LED on Pin(25).
-pwm = PWM(Pin(25))
+led = Pin("LED", Pin.OUT)
 
 # Set the PWM frequency.
-pwm.freq(1000)
+
 def blinkey():
-    duty = 0
-    direction = 1
-    for _ in range(8 * 256):
-        duty += direction
-        if duty > 255:
-            duty = 255
-            direction = -1
-        elif duty < 0:
-            duty = 0
-            direction = 1
-        pwm.duty_u16(duty * duty)
-        time.sleep(0.001)
+    led.on()
+    time.sleep(0.01)
+    led.off()
 
 def blink():
-    duty = 0
-    direction = 1
-    for _ in range(2 * 256):
-        duty += direction
-        if duty > 255:
-            duty = 255
-            direction = -1
-        elif duty < 0:
-            duty = 0
-            direction = 1
-        pwm.duty_u16(duty * duty)
-        time.sleep(0.001)
+    led.on()
+    time.sleep(0.01)
+    led.off()
     
 
 def stop():
@@ -91,6 +73,7 @@ def turn():
 #     print("caught exception {} {}".format(type(e).__name__, e))
 # Fade the LED in and out a few times.
 while True:
+    print("start")
     blink()
     blink()
     blink()
