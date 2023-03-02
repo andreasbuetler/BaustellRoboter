@@ -8,10 +8,9 @@ Uses pins GP26, GP27 and GP28. See more info [here](https://www.waveshare.com/wi
 Uses pins GP10 - 12 and GP19-21
 
 # Development
-## Prerequisites
-Have [ffmpeg](https://formulae.brew.sh/formula/ffmpeg#default) installed
 
 ## Audio
+Make sure you have [ffmpeg](https://formulae.brew.sh/formula/ffmpeg#default) installed.
 To compress any audio file down to 400kb use the Makefile in /Audio folder by running:
 
 ```
@@ -24,6 +23,7 @@ Then inside the websites folder (/websitecra) run:
 ```
 yarn run deploy
 ```
+It will be deployed to: https://baustellrobots.web.app/
 # Naming
 - Bella -> Helm: Rot, oranger Punkt
 - Bianca -> Helm: Gelb, oranger Punkt
