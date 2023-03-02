@@ -17,3 +17,11 @@ To compress any audio file down to 400kb use the Makefile in /Audio folder by ru
 ```
 make input="yourAudioFile.mp3"   
 ```
+# Naming
+- Bella -> Helm: Rot, oranger Punkt
+- Bianca -> Helm: Gelb, oranger Punkt
+- Fiona -> Helm: Orange, jsp label hinten
+- Cosimo -> Helm: Orange, grüner Sticker
+- Schorsch -> Helm: Gelb, FCK SVP Sticker
+- Adonis -> Helm: Orange, Implenia Sticker
+- Jochen -> Helm: Gelb, baby
