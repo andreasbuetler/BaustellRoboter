@@ -17,6 +17,13 @@ To compress any audio file down to 400kb use the Makefile in /Audio folder by ru
 ```
 make input="yourAudioFile.mp3"   
 ```
+## Website
+Website is made with  [CRA](https://create-react-app.dev/) 
+To deploy you must have [Firebase CLI](https://formulae.brew.sh/formula/firebase-cli) installed and be logged in with an account that has access to [this Firebase project](https://console.firebase.google.com/u/0/project/baustellrobots/database/baustellrobots-default-rtdb/data). 
+Then inside the websites folder (/websitecra) run:
+```
+yarn run deploy
+```
 # Naming
 - Bella -> Helm: Rot, oranger Punkt
 - Bianca -> Helm: Gelb, oranger Punkt
