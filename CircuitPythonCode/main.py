@@ -23,43 +23,48 @@ wifiPassword = os.getenv('WIFI_PASSWORD')
 print("Password: %s" % wifiPassword)
 notConnected = True
 attempts = 0
-while notConnected or attempts == 10:
+while notConnected and attempts <= 10:
     try:
         wifi.radio.connect(wifiSSID, wifiPassword)
         notConnected = False
+        print("Connected to WiFi")
     except:
         attempts += 1
         print("Connection failed on attempt %d" % attempts)
         pass
-print("Connected to WiFi")
-# https://learn.adafruit.com/adafruit-magtag/internet-connect
-# pool = socketpool.SocketPool(wifi.radio)
-# requests = adafruit_requests.Session(pool, ssl.create_default_context())
-# endpoint = os.getenv('API_ENDPOINT')
-# print("Fetching json from", endpoint)
-# response = requests.get(endpoint)
-# stateOfAll = response.json()["helmetStates"]
-# myState = stateOfAll[os.getenv("HELMET_ID")]
-# print("-" * 40)
-# print()
-# print("-" * 40)
+
 
 
 audio = audiobusio.I2SOut(board.GP27, board.GP28, board.GP26)
 # ngyu = audiomp3.MP3Decoder(open("NeverGonnaGiveYouUp.mp3", "rb"))
-slow = audiomp3.MP3Decoder(open("slow.mp3", "rb"))
+# array of audio files
+allAudioFiles = []
+for i in range(0, 10):
+    indexString = str(i)
+    try:
+        audioFileDecoded = audiomp3.MP3Decoder(open(indexString + ".mp3", "rb"))
+        allAudioFiles.append(audioFileDecoded)
+    except:
+        print("No file named", indexString + ".mp3")
+        pass
 
 myState = utils.getState()
+# todo hanlde case where there is connection
 while True:
     newState = utils.getState()
-    if newState["shouldPlay"] != myState["shouldPlay"]:
-        if newState["shouldPlay"]:
-            print("Playing!")
-            # audio.play(slow)
-        else:
-            audio.stop()
-    myState = newState
-    time.sleep(1)
+    if newState["shouldPlay"]:
+        
+        try:
+            audioToPlay = allAudioFiles[int(newState["audio"])]
+            print("Playing audio", newState["audio"], ".mp3")
+            audio.play(audioToPlay)
+            utils.setState("shouldPlay", False)
+        except:
+            print("No audio file with index", newState["audio"])
+            pass
+     
+    while audio.playing:
+        time.sleep(.1)
     pass
 
 print("Done playing!")
