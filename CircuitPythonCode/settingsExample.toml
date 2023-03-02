@@ -1,5 +1,5 @@
 # 👉 We don't want to make our wifi password so create a settings.toml file with the correct creds
 WIFI_SSID="HUAWEI-DCE4-5G"
 WIFI_PASSWORD="PastePasswordHere"
-API_ENDPOINT="https://api.npoint.io/33e561d387e334b1184d"
 HELMET_ID="helm1"
+API_ENDPOINT="https://baustellrobots-default-rtdb.europe-west1.firebasedatabase.app/helmetStates"

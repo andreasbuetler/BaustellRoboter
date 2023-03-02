@@ -1,44 +1,46 @@
 <head>
     <!--- LOLE --->
     <link rel="stylesheet" href="style.css">
+    <!-- firebase sdk -->
+    <!-- <script src="//unpkg.com/firebase/app" defer></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.17.1/firebase-app.js"
+        integrity="sha512-CNVd+XdKyWcHu0gQ0Tdo/HRjIoT0QHXOSjBrR50vMNlEjgoAuNGPoGtXtwMtIv5Qm0Q8ybsUYJSRWQF8d4TcTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
 <body id="body">
+    <script src="https://www.gstatic.com/firebasejs/9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9/firebase-firestore.js"></script>
     <div class="wrapper">
         <div>
             <div class="logo">
                 <img src="https://baustell.ch/images/baulogo.png" alt="baustell logo">
             </div>
             <div class="intro">
-                <p>Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue.</p>
+                <p>Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                    porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis,
+                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+                    imperdiet. Etiam ultricies nisi vel augue.</p>
             </div>
         </div>
-        <div class="container">
-            <div class="robot">
-                <div class="robot__image">
-                    👷‍♀️
-                </div>
-                <div class="robot__text">
-                    <p>Langsam, gemütlich, wia du</p>
-                </div>
-            </div>
-            <div class="robot">
-                <div class="robot__image">
-                    👷
-                </div>
-                <div class="robot__text">
-                    <p>radikal, zielgerichtet, mega guat</p>
-                </div>
-            </div>
-            <div class="robot">
-                <div class="robot__image">
-                    👷‍♂️
-                </div>
-                <div class="robot__text">
-                    <p>Schnell, aggressiv, dini muatter</p>
-                </div>
-            </div>
+        <div id="reactive">
+
         </div>
     </div>
-    <script src="script.js"></script>
+    <script type="text/babel">
+        function Hello() {
+            React.useEffect(
+                () => {
+                    console.log(firebase)
+                }, []
+            )        
+            return <h1>Hello World!</h1>;
+        }
+        const container = document.getElementById('reactive');
+        const root = ReactDOM.createRoot(container);
+        root.render(<Hello />)
+    </script>
 </body>

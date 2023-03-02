@@ -54,7 +54,8 @@ while True:
     newState = utils.getState()
     if newState["shouldPlay"] != myState["shouldPlay"]:
         if newState["shouldPlay"]:
-            audio.play(slow)
+            print("Playing!")
+            # audio.play(slow)
         else:
             audio.stop()
     myState = newState

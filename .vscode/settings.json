@@ -6,8 +6,20 @@
     "python.languageServer": "Pylance",
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.extraPaths": [
-        ".vscode/Pico-W-Stub/stubs"
+        "/Users/dariush/.vscode/extensions/joedevivo.vscode-circuitpython-0.1.20-darwin-arm64/boards/0x239A/0x8120",
+        "/Users/dariush/.vscode/extensions/joedevivo.vscode-circuitpython-0.1.20-darwin-arm64/stubs",
+        "/Users/dariush/Library/Application Support/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20230226/adafruit-circuitpython-bundle-py-20230226/lib"
     ],
     "picowgo.syncFolder": "",
-    "picowgo.openOnStart": true
+    "picowgo.openOnStart": true,
+    "python.linting.pylintEnabled": false,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none"
+    },
+    "circuitpython.board.version": null,
+    "circuitpython.board.vid": "0x239A",
+    "circuitpython.board.pid": "0x8120",
+    "cSpell.words": [
+        "wifi"
+    ]
 }
