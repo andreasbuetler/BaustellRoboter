@@ -24,6 +24,7 @@ Then inside the websites folder (/websitecra) run:
 ```
 yarn run deploy
 ```
+It will be deployed to: https://baustellrobots.web.app/
 # Naming
 - Bella -> Helm: Rot, oranger Punkt
 - Bianca -> Helm: Gelb, oranger Punkt
