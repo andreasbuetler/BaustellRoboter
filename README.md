@@ -25,3 +25,4 @@ make input="yourAudioFile.mp3"
 - Schorsch -> Helm: Gelb, FCK SVP Sticker
 - Adonis -> Helm: Orange, Implenia Sticker
 - Jochen -> Helm: Gelb, baby
+- + currently unnamed extra, should it be named?
