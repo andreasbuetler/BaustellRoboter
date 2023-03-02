@@ -10,7 +10,7 @@ Uses pins GP10 - 12 and GP19-21
 # Development
 
 ## Audio
-Make sure you have [ffmpeg](https://formulae.brew.sh/formula/ffmpeg#default) installed
+Make sure you have [ffmpeg](https://formulae.brew.sh/formula/ffmpeg#default) installed.
 To compress any audio file down to 400kb use the Makefile in /Audio folder by running:
 
 ```
