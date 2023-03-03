@@ -20,58 +20,55 @@ const Helmet = ({ helmetId, helmetState, helmetRef }: HelmetProps) => {
   };
   const currentAction = helmetState?.actions?.[helmetState?.actionIndex];
   return (
-    <HelmetWrapper>
+    <HelmetWrapper onClick={() => togglePlay()} isPlaying={helmetState?.audioOverride?.shouldPlay}>
       <Title>{helmetId}</Title>
       <CurrentAction>
         <ul>
-          <li>Current action Index: {helmetState?.actionIndex}</li>
           {currentAction?.type === "drive" && (
             <>
-            <li><b>Driving</b></li>
-            <li>Direction: {currentAction.direction}</li>
-            <li>Length: {currentAction.length}</li>
+            <div className="direction">
+            {currentAction?.direction === "backwards" && (
+              <p>backwards</p>
+            )}
+            {currentAction?.direction === "forwards" && (
+              <p>forwards</p>
+            )}
+            {currentAction?.direction === "stop" && (
+              <p>stop</p>
+            )}
+            {currentAction?.direction === "turnLeft" && (
+              <p>turn left</p>
+            )}
+            {currentAction?.direction === "turnRight" && (
+              <p>turnRight</p>
+            )}
+            </div>
             </>
           )}
           {currentAction?.type === "sound" && (
             <>
-            <li><b>Playing sound</b></li>
             <li>Audio file index: {currentAction.audioFileIndex}</li>
             </>
           )}
         </ul>
       </CurrentAction>
-      <p>Play an audio:</p>
-      <PlayToggle onClick={() => togglePlay()}>
-        {helmetState?.audioOverride?.shouldPlay ? "Stop" : "Play"}
-      </PlayToggle>
-      {Array.from(Array(4).keys()).map((i) => (
-        <AudioFileButton onClick={() => changeAudio(i)} key={i}>
-          {i}
-        </AudioFileButton>
-      ))}
+        {helmetState?.audioOverride?.shouldPlay ? "is playing" : "Play"}
     </HelmetWrapper>
   );
 };
 const Title = styled.h2`
   font-size: 2rem;
 `;
-const HelmetWrapper = styled.div`
+const HelmetWrapper = styled.div<{isPlaying?: boolean}>`
+ background-color: ${({isPlaying})=> isPlaying ? "green" : "none"};
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: column wrap;
-  max-width: 900px;
-  margin: 0 auto;
+  flex-flow: column nowrap;
   padding: 20px;
-  margin-bottom: var(--main-margin);
-`;
-const PlayToggle = styled.button`
-  all: unset;
-  background-color: var(--main-color);
-`;
-const AudioFileButton = styled.button`
-  all: unset;
-  background-color: var(--main-color);
+  min-height: 200px;
+  border-right: thin solid white;
+  border-bottom: thin solid white;
 `;
 const CurrentAction = styled.div``;
 export default Helmet;
