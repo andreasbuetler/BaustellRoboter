@@ -6,19 +6,23 @@ interface HelmetProps {
   helmetState: HelmetState;
 }
 const Helmet = ({ helmetId, helmetState, helmetRef }: HelmetProps) => {
+  const currentAction = helmetState?.actions?.[helmetState?.actionIndex];
   const togglePlay = () => {
     update(helmetRef, {
-      audioOverride: { shouldPlay: !helmetState.audioOverride.shouldPlay },
+      audioOverride: {
+        audioFileIndex: helmetState.audioOverride.audioFileIndex,
+        shouldPlay: !helmetState.audioOverride.shouldPlay,
+      },
     });
   };
   const changeAudio = (audioFileIndex: number) => {
     update(helmetRef, {
       audioOverride: {
         audioFileIndex: audioFileIndex,
+        shouldPlay: true,
       },
     });
   };
-  const currentAction = helmetState?.actions?.[helmetState?.actionIndex];
   return (
     <HelmetWrapper onClick={() => togglePlay()} isPlaying={helmetState?.audioOverride?.shouldPlay}>
       <Title>{helmetId}</Title>
