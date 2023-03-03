@@ -40,11 +40,7 @@ function App() {
       </Logo>
       <Intro>
         <p>
-          Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
-          tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
-          enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
-          Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
-          Aenean imperdiet. Etiam ultricies nisi vel augue.
+          Baustell Robots Sound Controller.
         </p>
       </Intro>
       {allHelmetStates && helmetStatesRef && database && (
@@ -62,12 +58,11 @@ function App() {
   );
 }
 const AppWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column wrap;
-  max-width: 900px;
-  margin: 0 auto;
+`;
+const InteractiveStuff = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 `;
 const Logo = styled.div`
   display: flex;
@@ -82,7 +77,6 @@ const Intro = styled.div`
   color: white;
   font-size: 24px;
   text-align: center;
-  margin-bottom: var(--main-margin);
+  border-bottom: thin solid white;
 `;
-const InteractiveStuff = styled.div``;
 export default App;
