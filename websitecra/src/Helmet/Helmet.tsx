@@ -1,5 +1,10 @@
 import { DatabaseReference, update } from "firebase/database";
 import styled from "styled-components";
+import backwards from "../icon/backwards.png";
+import forwards from "../icon/forwards.png";
+import left from "../icon/left.png";
+import stop from "../icon/stop.png";
+import right from "../icon/right.png";
 interface HelmetProps {
   helmetId: string;
   helmetRef: DatabaseReference;
@@ -32,19 +37,31 @@ const Helmet = ({ helmetId, helmetState, helmetRef }: HelmetProps) => {
             <>
             <div className="direction">
             {currentAction?.direction === "backwards" && (
-              <p>backwards</p>
+              <>
+              <img className="direction__icon" src={backwards} alt="backwards arrow" />
+              </>
+     
             )}
             {currentAction?.direction === "forwards" && (
-              <p>forwards</p>
+              <>
+              <img className="direction__icon" src={forwards} alt="forward arrow" />
+              </>
+             
             )}
             {currentAction?.direction === "stop" && (
-              <p>stop</p>
+              <>
+              <img className="direction__icon" src={stop} alt="Stop sign" />
+              </>
             )}
             {currentAction?.direction === "turnLeft" && (
-              <p>turn left</p>
+              <>
+              <img className="direction__icon" src={left} alt="left arrow" />
+              </>
             )}
             {currentAction?.direction === "turnRight" && (
-              <p>turnRight</p>
+              <>
+              <img className="direction__icon" src={right} alt="right arrow" />
+              </>
             )}
             </div>
             </>
@@ -56,7 +73,7 @@ const Helmet = ({ helmetId, helmetState, helmetRef }: HelmetProps) => {
           )}
         </ul>
       </CurrentAction>
-        {helmetState?.audioOverride?.shouldPlay ? "is playing" : "Play"}
+        {helmetState?.audioOverride?.shouldPlay ? " " : " "}
     </HelmetWrapper>
   );
 };
@@ -64,7 +81,8 @@ const Title = styled.h2`
   font-size: 2rem;
 `;
 const HelmetWrapper = styled.div<{isPlaying?: boolean}>`
- background-color: ${({isPlaying})=> isPlaying ? "green" : "none"};
+  background-color: ${({isPlaying})=> isPlaying ? "white" : "none"};
+  color: ${({isPlaying})=> isPlaying ? "var(--main-red)" : "none"};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,6 +91,9 @@ const HelmetWrapper = styled.div<{isPlaying?: boolean}>`
   min-height: 200px;
   border-right: thin solid white;
   border-bottom: thin solid white;
+  &:nth-child(even) {
+      border-right: none;
+    }
 `;
 const CurrentAction = styled.div``;
 export default Helmet;

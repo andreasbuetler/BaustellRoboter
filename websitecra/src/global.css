@@ -46,3 +46,8 @@ ul {
 .direction {
     margin: 0;
 }
+
+.direction__icon {
+    width: 100px;
+    margin-bottom: 3vh;
+}
