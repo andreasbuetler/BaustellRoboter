@@ -25,11 +25,11 @@ yarn run deploy
 ```
 It will be deployed to: https://baustellrobots.web.app/
 # Naming
-- Bella -> Helm: Rot, oranger Punkt
-- Bianca -> Helm: Gelb, oranger Punkt
-- Fiona -> Helm: Orange, jsp label hinten
-- Cosimo -> Helm: Orange, grüner Sticker
-- Schorsch -> Helm: Gelb, FCK SVP Sticker
-- Adonis -> Helm: Orange, Implenia Sticker
-- Jochen -> Helm: Gelb, baby
-- + currently unnamed extra, should it be named?
+- Bella (alien) -> Helm: Rot, oranger Punkt
+- Bianca (robo) -> Helm: Gelb, oranger Punkt
+- Fiona (monster) -> Helm: Orange, jsp label hinten
+- Cosimo (nuscheln) -> Helm: Orange, grüner Sticker
+- Schorsch (bidibida) -> Helm: Gelb, FCK SVP Sticker
+- Adonis (miau) -> Helm: Orange, Implenia Sticker
+- Jochen (psst) -> Helm: Gelb, baby
+- + NotSchorsch (bidibida) -> Naked
