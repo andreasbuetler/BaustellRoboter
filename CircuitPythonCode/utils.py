@@ -15,6 +15,7 @@ endpointWholeState = endpointBase + ".json"
 # audio setup
 audio = audiobusio.I2SOut(board.GP27, board.GP28, board.GP26)
 print("audio setup")
+
 def getState()->dict:
     # Get the state from the remote json
     try:
@@ -48,8 +49,8 @@ def playAudioFile(audioFileIndex: int, audioOutput) -> bool:
         audioFileDecoded = audiomp3.MP3Decoder(audioFile)
         print("Playing audio", indexString)
         audioOutput.play(audioFileDecoded)
-        while audioOutput.playing:
-            time.sleep(0.1)
+        # while audioOutput.playing:
+        #     time.sleep(0.1)
         del audioFileDecoded
         del audioFile
         return True
