@@ -48,6 +48,14 @@ ul {
 }
 
 .direction__icon {
-    width: 100px;
+    /* position: absolute; */
+    margin-bottom: 3vh;
+    width: 100%;
+}
+
+.direction__icon--sound {
+    /* position: absolute; */
+    z-index: 999;
+    width: 100%;
     margin-bottom: 3vh;
 }
