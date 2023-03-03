@@ -1,22 +1,20 @@
 import os
 import time
 import board
-import audiomp3
+
 import audiobusio
 import motor
 # wifi stuff
 import wifi
-import socketpool
-import ipaddress
-import adafruit_requests
-import ssl
 import utils
+import gc
+print("memory free init:", gc.mem_free())
 # Connect ot WIFI
-print("Available WiFi networks:")
-for network in wifi.radio.start_scanning_networks():
-    print("\t%s\t\tRSSI: %d\tChannel: %d" % (str(network.ssid, "utf-8"),
-            network.rssi, network.channel))
-wifi.radio.stop_scanning_networks()
+# print("Available WiFi networks:")
+# for network in wifi.radio.start_scanning_networks():
+#     print("\t%s\t\tRSSI: %d\tChannel: %d" % (str(network.ssid, "utf-8"),
+#             network.rssi, network.channel))
+# wifi.radio.stop_scanning_networks()
 wifiSSID = os.getenv('WIFI_SSID')
 print("Connecting to %s" % wifiSSID)
 wifiPassword = os.getenv('WIFI_PASSWORD')
@@ -35,31 +33,45 @@ while notConnected and attempts <= 10:
 
 
 myState = utils.getState()
+# audio setup
+audioOutput = audiobusio.I2SOut(board.GP27, board.GP28, board.GP26)
+
 # todo hanlde case where there is connection
-progressInCurrentAction = 0
+timestamp = -1
+utils.playAudioFile(0, audioOutput)
+oldActionIndex = None
 while True:
     newState = utils.getState()
+    # print("memory free:", gc.mem_free())
     if newState:
+        # if we have a new state
+        if oldActionIndex != newState["actionIndex"]:
+            # if we have a new state set the timestamp to the current time
+            print("new state")
+            timestamp = time.monotonic()
+            oldActionIndex = newState["actionIndex"]
         # if we have an audio override play it and then set the state shouldPlay to false
         if newState["audioOverride"] and newState["audioOverride"]["shouldPlay"]:
             audioFileIndex = newState["audioOverride"]["audioFileIndex"]
-            utils.playAudioFile(audioFileIndex)
-            utils.setState("shouldPlay", False, "/audioOverride")
+            didPlay = utils.playAudioFile(audioFileIndex, audioOutput)
+            utils.setState("shouldPlay", not didPlay, "/audioOverride")
+            del audioFileIndex
         
         actionIndex = newState["actionIndex"]
         # access an action with the actionIndex
         if newState["actionIndex"] >=0 and newState["actions"]:
+            # print("progressInCurrentAction",progressInCurrentAction)
             actionsArray = newState["actions"]
             currentAction = actionsArray[actionIndex]
             newActionIndex = (actionIndex + 1) % len(actionsArray)
+            del actionsArray
             # if we have not completed the current action
             if currentAction["type"] == "sound":
-                utils.playAudioFile(currentAction["audioFileIndex"])
+                utils.playAudioFile(currentAction["audioFileIndex"], audioOutput)
                 utils.setState("actionIndex", newActionIndex)
-            elif progressInCurrentAction < currentAction["length"]:
+            elif time.monotonic() <= currentAction["length"] + timestamp:
                 if currentAction["type"] == "drive":
                     direction = currentAction["direction"]
-                    progressInCurrentAction += 1
                     if direction == "forwards":
                         motor.forwards()
                     elif direction == "backwards":
@@ -70,9 +82,8 @@ while True:
                         motor.turnRight()
                     elif direction == "stop":
                         motor.stop()
+                del currentAction
             # if we have completed the current action set the actionIndex to the next action
             else:
-                progressInCurrentAction = 0
                 utils.setState("actionIndex", newActionIndex)
-
-print("Done playing!")
+        

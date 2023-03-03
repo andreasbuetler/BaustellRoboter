@@ -6,19 +6,23 @@ interface HelmetProps {
   helmetState: HelmetState;
 }
 const Helmet = ({ helmetId, helmetState, helmetRef }: HelmetProps) => {
+  const currentAction = helmetState?.actions?.[helmetState?.actionIndex];
   const togglePlay = () => {
     update(helmetRef, {
-      audioOverride: { shouldPlay: !helmetState.audioOverride.shouldPlay },
+      audioOverride: {
+        audioFileIndex: helmetState.audioOverride.audioFileIndex,
+        shouldPlay: !helmetState.audioOverride.shouldPlay,
+      },
     });
   };
   const changeAudio = (audioFileIndex: number) => {
     update(helmetRef, {
       audioOverride: {
         audioFileIndex: audioFileIndex,
+        shouldPlay: true,
       },
     });
   };
-  const currentAction = helmetState?.actions?.[helmetState?.actionIndex];
   return (
     <HelmetWrapper>
       <Title>{helmetId}</Title>
@@ -27,15 +31,19 @@ const Helmet = ({ helmetId, helmetState, helmetRef }: HelmetProps) => {
           <li>Current action Index: {helmetState?.actionIndex}</li>
           {currentAction?.type === "drive" && (
             <>
-            <li><b>Driving</b></li>
-            <li>Direction: {currentAction.direction}</li>
-            <li>Length: {currentAction.length}</li>
+              <li>
+                <b>Driving</b>
+              </li>
+              <li>Direction: {currentAction.direction}</li>
+              <li>Length: {currentAction.length}</li>
             </>
           )}
           {currentAction?.type === "sound" && (
             <>
-            <li><b>Playing sound</b></li>
-            <li>Audio file index: {currentAction.audioFileIndex}</li>
+              <li>
+                <b>Playing sound</b>
+              </li>
+              <li>Audio file index: {currentAction.audioFileIndex}</li>
             </>
           )}
         </ul>
