@@ -34,37 +34,45 @@ while notConnected and attempts <= 10:
         pass
 
 
-
-audio = audiobusio.I2SOut(board.GP27, board.GP28, board.GP26)
-# ngyu = audiomp3.MP3Decoder(open("NeverGonnaGiveYouUp.mp3", "rb"))
-# array of audio files
-allAudioFiles = []
-for i in range(0, 10):
-    indexString = str(i)
-    try:
-        audioFileDecoded = audiomp3.MP3Decoder(open(indexString + ".mp3", "rb"))
-        allAudioFiles.append(audioFileDecoded)
-    except:
-        print("No file named", indexString + ".mp3")
-        pass
-
 myState = utils.getState()
 # todo hanlde case where there is connection
+progressInCurrentAction = 0
 while True:
     newState = utils.getState()
-    if newState["shouldPlay"]:
+    if newState:
+        # if we have an audio override play it and then set the state shouldPlay to false
+        if newState["audioOverride"] and newState["audioOverride"]["shouldPlay"]:
+            audioFileIndex = newState["audioOverride"]["audioFileIndex"]
+            utils.playAudioFile(audioFileIndex)
+            utils.setState("shouldPlay", False, "/audioOverride")
         
-        try:
-            audioToPlay = allAudioFiles[int(newState["audio"])]
-            print("Playing audio", newState["audio"], ".mp3")
-            audio.play(audioToPlay)
-            utils.setState("shouldPlay", False)
-        except:
-            print("No audio file with index", newState["audio"])
-            pass
-     
-    while audio.playing:
-        time.sleep(.1)
-    pass
+        actionIndex = newState["actionIndex"]
+        # access an action with the actionIndex
+        if newState["actionIndex"] >=0 and newState["actions"]:
+            actionsArray = newState["actions"]
+            currentAction = actionsArray[actionIndex]
+            newActionIndex = (actionIndex + 1) % len(actionsArray)
+            # if we have not completed the current action
+            if currentAction["type"] == "sound":
+                utils.playAudioFile(currentAction["audioFileIndex"])
+                utils.setState("actionIndex", newActionIndex)
+            elif progressInCurrentAction < currentAction["length"]:
+                if currentAction["type"] == "drive":
+                    direction = currentAction["direction"]
+                    progressInCurrentAction += 1
+                    if direction == "forwards":
+                        motor.forwards()
+                    elif direction == "backwards":
+                        motor.backwards()
+                    elif direction == "turnLeft":
+                        motor.turnLeft()
+                    elif direction == "turnRight":
+                        motor.turnRight()
+                    elif direction == "stop":
+                        motor.stop()
+            # if we have completed the current action set the actionIndex to the next action
+            else:
+                progressInCurrentAction = 0
+                utils.setState("actionIndex", newActionIndex)
 
 print("Done playing!")

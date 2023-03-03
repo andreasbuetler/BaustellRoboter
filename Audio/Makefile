@@ -1,6 +1,14 @@
-# This converts a audio file to a compressed mp3 file below 450kb
-INPUT_FILE = $(input)
-OUTPUT_FILE = $(basename $(INPUT_FILE))_compressed.mp3
+INPUT_FOLDER = $(input)
+OUTPUT_FOLDER = $(output)
 
-$(OUTPUT_FILE): $(INPUT_FILE)
-	ffmpeg -i $(INPUT_FILE) -ac 1 -ar 11025 -b:a 32k -codec:a libmp3lame -qscale:a 2 $@
+INPUT_FILES = $(wildcard $(INPUT_FOLDER)/*.mp3)
+OUTPUT_FILES = $(patsubst $(INPUT_FOLDER)/%.mp3,$(OUTPUT_FOLDER)/%.mp3,$(INPUT_FILES))
+
+.PHONY: all
+
+all: $(OUTPUT_FILES)
+
+$(OUTPUT_FOLDER)/%.mp3: $(INPUT_FOLDER)/%.mp3
+	@mkdir -p $(dir $@)
+	ffmpeg -i $< -ac 1 -ar 11025 -b:a 32k -codec:a libmp3lame -qscale:a 2 $@
+	mv $@ $(dir $@)/$(shell printf '%d.mp3' $(subst $(OUTPUT_FOLDER)/,,$(basename $@)))
