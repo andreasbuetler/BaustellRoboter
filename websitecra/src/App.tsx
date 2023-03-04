@@ -44,16 +44,19 @@ function App() {
               <Helmet key={helmetId} helmetId={helmetId} helmetRef={helmetRef} helmetState={helmetState} />
             );
           })}
+          <div className="logo__intro">
+            <Logo>
+              <img src="https://baustell.ch/images/baulogo.png" alt="baustell logo" />
+            </Logo>
+            <Intro>
+              <p>
+                Baustell Robots Sound Controller.
+              </p>
+            </Intro>
+          </div>
         </InteractiveStuff>
       )}
-      <Logo>
-        <img src="https://baustell.ch/images/baulogo.png" alt="baustell logo" />
-      </Logo>
-      <Intro>
-        <p>
-          Baustell Robots Sound Controller.
-        </p>
-      </Intro>
+      
     </AppWrapper>
   );
 }
@@ -70,13 +73,12 @@ const Logo = styled.div`
   align-items: center;
   margin-top: var(--main-margin);
   img {
-    width: 250px;
+    width: 100px;
   }
 `;
 const Intro = styled.div`
   color: white;
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
-  border-bottom: thin solid white;
 `;
 export default App;

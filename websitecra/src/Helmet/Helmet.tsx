@@ -104,6 +104,9 @@ const HelmetWrapper = styled.div<{ isPlaying?: boolean }>`
   &:nth-child(even) {
       border-right: none;
     }
+  &:nth-child(7) {
+    border-bottom: none;
+  }  
 `;
 const CurrentAction = styled.div`
   width: 50px;
