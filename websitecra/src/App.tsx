@@ -35,14 +35,6 @@ function App() {
 
   return (
     <AppWrapper>
-      <Logo>
-        <img src="https://baustell.ch/images/baulogo.png" alt="baustell logo" />
-      </Logo>
-      <Intro>
-        <p>
-          Baustell Robots Sound Controller.
-        </p>
-      </Intro>
       {allHelmetStates && helmetStatesRef && database && (
         <InteractiveStuff>
           {Object.keys(allHelmetStates).map((helmetId) => {
@@ -54,6 +46,14 @@ function App() {
           })}
         </InteractiveStuff>
       )}
+      <Logo>
+        <img src="https://baustell.ch/images/baulogo.png" alt="baustell logo" />
+      </Logo>
+      <Intro>
+        <p>
+          Baustell Robots Sound Controller.
+        </p>
+      </Intro>
     </AppWrapper>
   );
 }
@@ -68,7 +68,7 @@ const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: var(--main-margin);
+  margin-top: var(--main-margin);
   img {
     width: 250px;
   }

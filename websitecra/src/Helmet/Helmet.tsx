@@ -88,7 +88,7 @@ const Helmet = ({ helmetId, helmetState, helmetRef }: HelmetProps) => {
   );
 };
 const Title = styled.h2`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 const HelmetWrapper = styled.div<{ isPlaying?: boolean }>`
   background-color: ${({ isPlaying }) => isPlaying ? "white" : "none"};
@@ -97,8 +97,8 @@ const HelmetWrapper = styled.div<{ isPlaying?: boolean }>`
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
-  padding: 20px;
-  min-height: 200px;
+  padding: 10px;
+  min-height: 22.55vh;
   border-right: thin solid white;
   border-bottom: thin solid white;
   &:nth-child(even) {
@@ -106,6 +106,6 @@ const HelmetWrapper = styled.div<{ isPlaying?: boolean }>`
     }
 `;
 const CurrentAction = styled.div`
-width: 100px;
+  width: 50px;
 `;
 export default Helmet;
