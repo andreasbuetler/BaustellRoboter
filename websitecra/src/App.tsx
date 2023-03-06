@@ -65,12 +65,14 @@ function App() {
             );
           })}
           <div className="logo__intro">
+            <a href="https://www.instagram.com/baustell.ch/" about="blank">
             <Logo>
               <img
                 src="https://baustell.ch/images/baulogo.png"
                 alt="baustell logo"
-              />
+                />
             </Logo>
+                </a>
             <Intro>
               <p>Baustell Robots Sound Controller.</p>
             </Intro>
